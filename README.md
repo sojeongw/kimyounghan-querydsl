@@ -1,1 +1,1 @@
-# kimyounghan-querydsld
+# kimyounghan-querydsl
