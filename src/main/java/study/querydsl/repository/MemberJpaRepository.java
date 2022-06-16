@@ -53,19 +53,19 @@ public class MemberJpaRepository {
     }
 
     private BooleanExpression usernameEq(String username) {
-        return hasText(username) ? null : member.username.eq(username);
+        return hasText(username) ? member.username.eq(username) : null;
     }
 
     private BooleanExpression teamNameEq(String teamName) {
-        return hasText(teamName) ? null : team.name.eq(teamName);
+        return hasText(teamName) ? team.name.eq(teamName) : null;
     }
 
     private BooleanExpression ageGoe(Integer ageGoe) {
-        return ageGoe == null ? null : member.age.goe(ageGoe);
+        return ageGoe == null ? member.age.goe(ageGoe) : null;
     }
 
     private BooleanExpression ageLoe(Integer ageLoe) {
-        return ageLoe == null ? null : member.age.loe(ageLoe);
+        return ageLoe == null ? member.age.loe(ageLoe) : null;
     }
 
     public List<MemberTeamDto> searchByBuilder(MemberSearchCondition condition) {
