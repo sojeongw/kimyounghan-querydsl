@@ -67,7 +67,17 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
         List<MemberTeamDto> content = results.getResults();
         long total = results.getTotal();
 
-        return new PageImpl<>(content, pageable, total);
+        JPAQuery<Member> countQuery = queryFactory
+                .select(member)
+                .from(member)
+                .leftJoin(member.team, team)
+                .where(usernameEq(condition.getUsername()),
+                        teamNameEq(condition.getTeamName()),
+                        ageGoe(condition.getAgeGoe()),
+                        ageLoe(condition.getAgeLoe()));
+
+//        return new PageImpl<>(content, pageable, total);
+        return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
     }
 
     @Override
